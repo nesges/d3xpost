@@ -1,0 +1,60 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>D3Xpost</title>
+    <link rel=stylesheet type=text/css href="{{ url_for('static', filename='style.css') }}">
+    <meta property="og:type" content="website"/>
+    <meta property="og:url" content="https://moax.dnddeutsch.de"/>
+    <meta property="og:title" content="based on Moa: Mastodon/Twitter Crossposter"/>
+    <meta property="og:description" content="Link your Mastodon account to Twitter"/>
+
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:title" content="Moa: Mastodon/Twitter Crossposter"/>
+    <meta name="twitter:description" content="Link your Mastodon account to Twitter"/>
+    <link rel="icon" href="data:,">
+
+</head>
+<body>
+<div class="center">
+<pre>
+_______   ____                              / / 
+\_   _ \ /__  \    _ __ ___   ___   __ _\ \/ /  
+  | | \ \  _| /   | '_ ` _ \ / _ \ / _` |\  /   
+ _| |_/ /___| \   | | | | | | (_) | (_| |/  \   
+/______/ \____/   |_| |_| |_|\___/ \__,_| /\ \  
+                                       / /      
+</pre>
+
+
+    <p>Verbinde dein <a href="https://joinmastodon.org">Mastodon</a>-Konto mit <a href="https://twitter.com">Twitter</a> mit der <strong>D3Xpost-Bridge</strong>.</p>
+
+    <p id="cookiecheck" class="message" style="display: none;">Please allow cookies for this site or it won't work
+        properly.</p>
+
+    {% for message in get_flashed_messages() %}
+        <p class="message">{{ message }}</p>
+    {% endfor %}
+
+    {% block body %}{% endblock %}
+
+    <hr>
+
+    <p>Join the Moa party!</p>
+    <p>D3Xpost basiert auf Moa und diese Instanz l&auml;uft als &ouml;ffentlich zug&auml;nglicher Dienst. Wenn du dich einbringen m&ouml;chtest, mehr erfahren, ein Problem melden oder der weiteren Entwicklung folgen willst,
+    dann <a href="https://moaparty.com">besuche die moaparty.com Website »</a></p>
+    <hr>
+    <p>See the list of current <a href="https://moaparty.com/maintainers">Maintainers</a>. Code available on <a href="https://gitlab.com/fedstoa/moa">gitlab.com/fedstoa/moa</a>.</p>
+    <p>Get Updates on <a href="https://fosstodon.org/@moaparty">Mastodon</a> or <a href="https://twitter.com/moaparty">Twitter</a>.
+        <a href="{{ url_for('privacy') }}">Privacy Policy</a>.</p>
+
+</div>
+
+<script>
+    if (!navigator.cookieEnabled) {
+        var el = document.getElementById('cookiecheck');
+        el.style.display = "block";
+    }
+</script>
+</body>
+</html>
