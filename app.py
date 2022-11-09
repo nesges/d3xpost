@@ -9,7 +9,7 @@ import pygal
 import twitter
 from authlib.common.errors import AuthlibBaseError
 from authlib.integrations._client import MissingRequestTokenError
-from flask import Flask, flash, g, redirect, render_template, request, session, url_for
+from flask import Flask, flash, g, redirect, render_template, request, session, url_for, send_from_directory
 from flask_migrate import Migrate
 from authlib.integrations.flask_client import OAuth
 from flask_sqlalchemy import SQLAlchemy
@@ -791,6 +791,10 @@ def privacy():
 def page_not_found(e):
     return render_template('404.html'), 404
 
+@app.route('/favicon.ico')
+def favicon():
+    return send_from_directory(os.path.join(app.root_path, 'static'),
+                               'favicon.ico', mimetype='image/vnd.microsoft.icon')
 
 if __name__ == '__main__':
 

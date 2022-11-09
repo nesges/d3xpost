@@ -81,6 +81,8 @@ class TSettings(Base):
     instagram_post_to_mastodon = Column(Boolean, nullable=False, default=False)
     instagram_include_link = Column(Boolean, nullable=False, default=True)
 
+    xpost_suffix = Column(String(100), nullable=False, default="")
+
     def __init__(self, **kwargs):
         kwargs.setdefault('post_to_twitter', True)
         kwargs.setdefault('post_private_to_twitter', False)
@@ -100,6 +102,8 @@ class TSettings(Base):
         kwargs.setdefault('instagram_post_to_twitter', False)
         kwargs.setdefault('instagram_post_to_mastodon', False)
         kwargs.setdefault('instagram_include_link', True)
+        
+        kwargs.setdefault('xpost_suffix', '')
 
         super(TSettings, self).__init__(**kwargs)
 
