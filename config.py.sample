@@ -6,7 +6,40 @@ class ProductionConfig(DefaultConfig):
 class DevelopmentConfig(DefaultConfig):
     DEBUG = True
     DEVELOPMENT = True
-    SEND = False
+    SEND = True
+    MAINTENANCE_MODE = False
+    
+    MOA_APP_NAME = 'D3Xpost'
+    MOA_APP_URL = 'https://xpost.dnddeutsch.de'
+    XPOST_SUFFIX = '#xpost'
+    
+    # SECRET_KEY is needed to sign our session cookie. Should be a long random string. Generate with:
+    # python -c 'import secrets; print(secrets.token_hex())'
+    SECRET_KEY = 'this-really-needs-to-be-changed'
+    
+    # Set this to the domain where this Moa is running (and avoid setting SERVER_NAME)
+    SESSION_COOKIE_DOMAIN = 'your.domain.tld'
+   
+    # Generate your Twitter API Key and Secret (CONSUMER_KEY, CONSUMER_SECRET) in Twitters Developer Portal
+    # https://developer.twitter.com/en/docs/authentication/oauth-1-0a/api-key-and-secret
+    # Remember to add your callback url to the app (Settings -> User authentication settings -> App Info -> Callback URI)
+    # callback url: http://your.domain.tld:5000/twitter_oauthorized
+    TWITTER_CONSUMER_KEY = ''
+    TWITTER_CONSUMER_SECRET = ''
+    
+    # Optional: Mailserver for outgoing notifications
+    MAIL_SERVER = None
+    MAIL_PORT = 587
+    MAIL_USE_TLS = True
+    MAIL_USERNAME = ''
+    MAIL_PASSWORD = ''
+    MAIL_TO = ''
+    MAIL_DEFAULT_SENDER = 'D3Xpost'
+    
+    # Optional: Blacklist Twitter users and Mastodon instances
+    TWITTER_BLACKLIST = []
+    MASTODON_BLACKLIST = []
+       
 
 class TestingConfig(DefaultConfig):
     TESTING = True

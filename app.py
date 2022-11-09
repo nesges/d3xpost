@@ -254,7 +254,7 @@ def twitter_login():
             next=request.args.get('next')
     )
 
-    app.logger.debug(callback_url)
+    app.logger.debug('CALLBACK URL: '+callback_url)
 
     try:
         twitter_url = oauth.twitter.authorize_redirect(callback_url)
@@ -314,14 +314,14 @@ def get_or_create_host(hostname):
 
         try:
             client_id, client_secret = Mastodon.create_app(
-                    "Moa",
+                    (app.config.get('MOA_APP_NAME') if app.config.get('MOA_APP_NAME') else "D3Xpost" ),
                     scopes=mastodon_scopes,
                     api_base_url=f"https://{hostname}",
-                    website="https://moa.party/",
+                    website= (app.config.get('MOA_APP_URL') if app.config.get('MOA_APP_URL') else "https://xpost.dnddeutsch.de/"),
                     redirect_uris=url_for("mastodon_oauthorized", _external=True)
             )
 
-            app.logger.info(f"New host created for {hostname}")
+            app.logger.debug(f"New App created for {hostname} as {app.config.get('MOA_APP_NAME')} / {app.config.get('MOA_APP_URL')}")
 
             mastodonhost = MastodonHost(hostname=hostname,
                                         client_id=client_id,

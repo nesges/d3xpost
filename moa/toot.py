@@ -1,6 +1,8 @@
 import html
 import logging
 import re
+import importlib
+import os
 from datetime import datetime, timezone
 from urllib.parse import urlparse
 
@@ -304,13 +306,18 @@ class Toot(Message):
 
     def split_toot(self, max_length):
 
+        moa_config = os.environ.get('MOA_CONFIG', 'DevelopmentConfig')
+        c = getattr(importlib.import_module('config'), moa_config)
+        suffix = ' ' + c.XPOST_SUFFIX if c.XPOST_SUFFIX else ''
+        max_length -= len(suffix)
+
         self.message_parts = []
         part_n = 1
 
         expected_length = self.expected_status_length(self.clean_content)
 
         if expected_length <= max_length:
-            self.message_parts.append(self.clean_content)
+            self.message_parts.append(f"{self.clean_content}{suffix}")
 
         else:
 
@@ -333,7 +340,7 @@ class Toot(Message):
 
                         # logger.debug(f'Part is full ({self.expected_status_length(current_part)}):{current_part}')
 
-                        self.message_parts.append(current_part)
+                        self.message_parts.append(f"{current_part}{suffix}")
                         current_part = next_word
 
                     else:
@@ -345,7 +352,7 @@ class Toot(Message):
                     current_part = f"{current_part} XXXXX".lstrip()
                     # logger.debug(f'Last Part ({self.expected_status_length(current_part)}):{current_part}')
 
-                    self.message_parts.append(current_part.strip())
+                    self.message_parts.append(f"{current_part.strip()}{suffix}")
 
                 for i, msg in enumerate(self.message_parts):
                     self.message_parts[i] = msg.replace('XXXXX', f"({i+1}/{len(self.message_parts)})")
@@ -357,4 +364,4 @@ class Toot(Message):
                 truncated_text = self.clean_content[:tweet_length] + suffix
 
                 logger.debug(f"Truncated Text length is {len(truncated_text)}")
-                self.message_parts.append(truncated_text)
+                self.message_parts.append(f"{truncated_text}{suffix}")
