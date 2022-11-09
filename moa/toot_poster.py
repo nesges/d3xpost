@@ -3,7 +3,6 @@ import os
 import sys
 import tempfile
 import time
-import importlib
 from os.path import splitext
 from typing import Optional
 from urllib.parse import urlparse
@@ -103,6 +102,8 @@ class TootPoster(Poster):
         post_success = False
         spoiler_text = ""
 
+        suffix = ' ' + settings.xpost_suffix if settings.xpost_suffix else ''
+
         if msg_type == 'Tweet':
             if self.bridge.t_settings.tweets_behind_cw:
                 spoiler_text = self.bridge.t_settings.tweet_cw_text
@@ -116,12 +117,9 @@ class TootPoster(Poster):
             if media_ids:
                 logger.info(f'With media')
 
-            moa_config = os.environ.get('MOA_CONFIG', 'DevelopmentConfig')
-            c = getattr(importlib.import_module('config'), moa_config)
-
             try:
                 post = self.api.status_post(
-                        status_text + (' ' + c.XPOST_SUFFIX if c.XPOST_SUFFIX else '') ,
+                        status_text + suffix,
                         media_ids=media_ids,
                         visibility=visibility,
                         sensitive=sensitive,

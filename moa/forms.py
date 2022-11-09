@@ -38,6 +38,8 @@ class SettingsForm(FlaskForm):
     instagram_post_to_twitter = BooleanField('Post Instagrams to Twitter?')
     instagram_post_to_mastodon = BooleanField('Post Instagrams to Mastodon?')
     instagram_include_link = BooleanField('Include link to instagram post')
+    
+    xpost_suffix = StringField('Xpost Suffix: ')
 
     def remove_masto_and_twitter_fields(self):
         del self.post_to_twitter
@@ -56,6 +58,7 @@ class SettingsForm(FlaskForm):
 
         del self.tweets_behind_cw
         del self.tweet_cw_text
+        del self.xpost_suffix
 
 
 class MastodonIDForm(FlaskForm):

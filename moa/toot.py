@@ -1,8 +1,6 @@
 import html
 import logging
 import re
-import importlib
-import os
 from datetime import datetime, timezone
 from urllib.parse import urlparse
 
@@ -306,9 +304,7 @@ class Toot(Message):
 
     def split_toot(self, max_length):
 
-        moa_config = os.environ.get('MOA_CONFIG', 'DevelopmentConfig')
-        c = getattr(importlib.import_module('config'), moa_config)
-        suffix = ' ' + c.XPOST_SUFFIX if c.XPOST_SUFFIX else ''
+        suffix = ' ' + settings.xpost_suffix if settings.xpost_suffix else ''
         max_length -= len(suffix)
 
         self.message_parts = []

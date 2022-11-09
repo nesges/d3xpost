@@ -58,6 +58,8 @@
             <div>NOTE: Retweets are always posted as 'Unlisted'.</div>
             <li>{{ form.tweets_behind_cw }}{{ form.tweets_behind_cw.label }} {{ form.tweet_cw_text }}</li>
             <div>NOTE: Tweets containing "CW: phrase" will have a Content Warning when converted to a toot.</div>
+            <hr>
+            <li><b>{{ form.xpost_suffix.label }}</b>{{ form.xpost_suffix }} Das sollte ein einzigartiger Hashtag sein, der <b>ausschlie&szlig;lich f&uuml;r deine Crossposts</b> verwendet wird. Er wird sowohl an Tweets als auch an Toots angehangen. Beachte, dass sie dadurch auch entsprechend l&auml;nger werden.</li>
             {% endif %}
 
             {% if g.bridge.instagram_access_code %}
