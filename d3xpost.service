@@ -1,0 +1,14 @@
+[Unit]
+Description=D3Xpost Mastodon x Twitter Bridge
+Wants=network-online.target
+After=network.target
+
+[Service]
+Type=simple
+WorkingDirectory=/opt/d3xpost
+ExecStart=/opt/d3xpost/run-dev.sh
+Restart=on-failure
+RestartSec=1s
+
+[Install]
+WantedBy=multi-user.target
