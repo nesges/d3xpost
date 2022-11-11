@@ -102,9 +102,9 @@ class TootPoster(Poster):
         post_success = False
         spoiler_text = ""
 
-        suffix = ' ' + settings.xpost_suffix if settings.xpost_suffix else ''
+        suffix = ' ' + self.bridge.t_settings.xpost_suffix if self.bridge.t_settings.xpost_suffix else ''
 
-        if msg_type == 'Tweet':
+        if msg_type == 'Tweet': 
             if self.bridge.t_settings.tweets_behind_cw:
                 spoiler_text = self.bridge.t_settings.tweet_cw_text
 
