@@ -304,7 +304,7 @@ class Toot(Message):
 
     def split_toot(self, max_length):
 
-        suffix = ' ' + settings.xpost_suffix if settings.xpost_suffix else ''
+        suffix = ' ' + self.settings.xpost_suffix if self.settings.xpost_suffix else ''
         max_length -= len(suffix)
 
         self.message_parts = []

@@ -36,8 +36,8 @@ echo ''
 echo '[ APT ]'
 echo ''
 echo 'Installing required packages'
-execute "sudo apt update"
-execute "sudo apt install make build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm libncursesw5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev python3-dev"
+execute sudo apt update
+execute sudo apt install make build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm libncursesw5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev python3-dev
 
 echo ''
 echo '[ PYENV ]'
@@ -83,6 +83,7 @@ echo 'Create SQLite database in moa.db'
 execute MOA_CONFIG=DevelopmentConfig pipenv run python -m moa.models
 
 echo ''
-echo 'I am done here. Next you can run the server with ./run-dev.sh and the workers'
-echo 'with ./run-worker.sh. You may want to run d3xpost as a systemd service. Use'
-echo 'd3xpost-service as a template for that. Good luck! :-)'
+echo 'I am done here. Next you should edit config.py and then you may run the'
+echo 'server with ./run-dev.sh and the workers with ./run-worker.sh. You may'
+echo 'want to run d3xpost as a systemd service. Use d3xpost-service as a template'
+echo 'for that. Good luck! :-)'

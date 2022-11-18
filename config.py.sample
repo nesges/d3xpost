@@ -11,7 +11,6 @@ class DevelopmentConfig(DefaultConfig):
     
     MOA_APP_NAME = 'D3Xpost'
     MOA_APP_URL = 'https://xpost.dnddeutsch.de'
-    XPOST_SUFFIX = '#xpost'
     
     # SECRET_KEY is needed to sign our session cookie. Should be a long random string. Generate with:
     # python -c 'import secrets; print(secrets.token_hex())'
